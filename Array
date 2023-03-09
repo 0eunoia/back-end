@@ -1,0 +1,25 @@
+package chap_05;
+
+public class _01_Array {
+    public static void main(String[] args) {
+        //배열: 같은 자료형의 값 여러개를 저장하는 연속된 공간
+        String coffeeRoss ="아메리카노";
+        String coffeeRachel = "라떼";
+        String coffeeChendler = "카페모카";
+        String coffeeMonica = "카푸치노";
+
+        System.out.println(coffeeRoss + " 하나");
+        System.out.println(coffeeRachel + " 하나");
+        System.out.println(coffeeChendler + " 하나");
+        System.out.println(coffeeMonica + " 하나");
+        System.out.println("주세요");
+
+        // 배열 선언 첫 번째 방법
+        String[] coffees = new String[4];
+
+        // 두 번째 방법
+        // String coffees[] = new String[4];
+//        coffees[0] = "아메리카노"; //0 부터 시작
+//        coffees[1] = "카페모카";
+//        coffees[2] = "라뗴";
+//        coffees[3] = "카푸치노";
