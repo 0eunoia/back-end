@@ -1,0 +1,43 @@
+public class Student {
+
+    // 필드
+    private String name; // 이름
+    private int age; // 나이
+    private int Korean_score; // 국어 점수
+    private int math_score; // 수학 점수
+    private int english_score; // 영어 점수
+
+
+    // 생성자
+    public Student(String name, int age, int korean_score, int math_score, int english_score) {
+        this.name = name;
+        this.age = age;
+        this.Korean_score = korean_score;
+        this.math_score = math_score;
+        this.english_score = english_score;
+    }
+    // 메소드
+    public void prnitScore() {
+        System.out.println("이름 : " + name);
+        System.out.println("나이 : " + age);
+        System.out.println("국어 점수 :" + Korean_score);
+        System.out.println("수학 점수 : " + math_score);
+        System.out.println("영어 점수 : " + english_score);
+    }
+    public void Setage (int age) {
+        this.age = age;
+    }
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student student = new Student("이영은",27,100,75,80);
+        student.prnitScore(); // 인스턴스 메소드 호출
+
+        student.Setage(28);
+        System.out.println(student.getAge());
+    }
+}
