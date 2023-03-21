@@ -1,0 +1,14 @@
+select * from users u
+where u.user_id in (select o.user_id from orders o 
+	where o.payment_method = 'kakaopay');
+    
+    
+/*
+
+쿼리가 실행되는 순서
+1 from 실행: users 데이터를 가져와줌
+2 Subquery 실행: 해당되는 user_id의 명단을 뽑아줌
+3 where .. in 절에서 subquery의 결과에 해당되는 'user_id의 명단' 조건으로 필터링 해줌
+4 조건에 맞는 결과 출력
+
+*/
