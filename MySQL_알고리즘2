@@ -1,0 +1,126 @@
+중복 제거하기
+
+```sql
+SELECT COUNT(DISTINCT NAME)
+FROM ANIMAL_INS
+WHERE NAME IS NOT NULL
+
+# COUNT 활용하기 - 동물의 이름 갯수를 조회하는 것이므로, NAME에 COUNT 함수를 적용
+# DISTINCT 활용하기 - 중복 데이터를 제거하고자 하는 열은 NAME 
+# NULL 값이 아닌 것을 비교하는 방법은 IS NOT NULL
+```
+
+동물 수 구하기
+
+```sql
+SELECT COUNT(*) FROM ANIMAL_INS;
+```
+
+최솟값 구하기
+
+```sql
+SELECT MIN(DATETIME) FROM ANIMAL_INS;
+
+# MIN 함수
+```
+
+동명 동물 수 찾기
+
+```sql
+
+SELECT NAME, COUNT(*)
+FROM ANIMAL_INS
+GROUP BY NAME
+HAVING COUNT(NAME) > 1
+ORDER BY NAME;
+
+# HAVING 집계함수
+```
+
+이름에 el이 들어가는 동물 찾기
+
+```sql
+SELECT ANIMAL_ID, NAME
+FROM ANIMAL_INS
+WHERE NAME LIKE '%EL%' AND ANIMAL_TYPE = 'Dog'
+ORDER BY NAME ASC
+
+# MySQL은 대/소문자를 구분하지 않아서 NAME 컬럼에 'el'처럼 소문자로 포함된 경우나
+# ANIMAL_TYPE='DOG'에서 뒷 부분이 소문자로 'Dog'라고 저장된 데이터도 검색한다.
+# 그래서 WHERE 조건으로 조회함.
+```
+
+NULL 처리하기
+
+```sql
+SELECT ANIMAL_TYPE, IFNULL(NAME,'No name') AS NAME, SEX_UPON_INTAKE
+FROM ANIMAL_INS;
+
+# IFNULL(A, B)
+# A가 NULL이면 B를, 그렇지 않다면 A를 반환.
+```
+
+DATETIME에서 DATE로 형 변환
+
+```sql
+SELECT ANIMAL_ID, NAME, DATE_FORMAT(DATETIME, '%Y-%m-%d') AS 날짜 
+FROM ANIMAL_INS ORDER BY ANIMAL_ID;
+```
+
+가격이 제일 비싼 식품의 정보 출력하기
+
+```sql
+SELECT *
+FROM FOOD_PRODUCT
+ORDER BY PRICE DESC
+LIMIT 1;
+```
+
+입양 시각 구하기(1)
+
+```sql
+SELECT HOUR(DATETIME) HOUR, COUNT(DATETIME) COUNT
+FROM ANIMAL_OUTS
+WHERE HOUR(DATETIME) >= 9 AND HOUR(DATETIME) <= 19
+GROUP BY HOUR
+ORDER BY HOUR;
+```
+
+고양이와 개는 몇 마리 있을까
+
+```sql
+SELECT ANIMAL_TYPE, COUNT(ANIMAL_TYPE)
+FROM ANIMAL_INS
+GROUP BY ANIMAL_TYPE
+ORDER BY ANIMAL_TYPE
+```
+
+중성화 여부 파악하기
+
+```sql
+SELECT ANIMAL_ID, NAME, 
+CASE
+    WHEN SEX_UPON_INTAKE LIKE 'Neutered%'
+    OR SEX_UPON_INTAKE LIKE 'Spayed%'
+    THEN 'O'
+    ELSE 'X'
+END 중성화
+FROM ANIMAL_INS 
+ORDER BY ANIMAL_ID;
+
+# CASE
+```
+
+카테고리 별 상품 개수 구하기
+
+```sql
+SELECT LEFT (PRODUCT_CODE, 2) AS CATEGORY, COUNT (PRODUCT_ID)
+FROM PRODUCT
+GROUP BY CATEGORY
+ORDER BY CATEGORY
+
+# LEFE(컬럼명, 왼쪽부터 가져올 갯수), AS로 CATEGORY 지정,
+# GROUP BY, COUNT 함수
+# ORDER BY로 정렬.
+
+```
