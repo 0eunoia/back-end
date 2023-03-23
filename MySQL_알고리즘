@@ -1,0 +1,177 @@
+# MySQL 알고리즘
+가장 비싼 상품 구하기
+
+```sql
+SELECT MAX(PRICE) AS MAX_PRICE FROM PRODUCT;
+
+/*
+PRODUCT 테이블에서 MAX(PRICE) 라는 컬럼의 이름을 MAX_PRICE 로 지정해 
+Select 결과를 나타내준다.
+*/
+```
+
+흉부외과 또는 일반외과 의사 목록 출력하기
+
+```sql
+SELECT DR_NAME,DR_ID, MCDP_CD, DATE_FORMAT(HIRE_YMD, '%Y-%m-%d') 
+AS HIRE_YMD
+FROM DOCTOR
+WHERE MCDP_CD = 'CS' OR MCDP_CD = 'GS'
+ORDER BY HIRE_YMD DESC, DR_NAME ASC
+```
+
+12세 이하인 여자 환자 목록 출력하기
+
+```sql
+SELECT PT_NAME,	PT_NO,	GEND_CD,AGE,ifnull(TLNO,'NONE') as TLNO
+from PATIENT
+where (AGE<=12) and (GEND_CD='W')
+order by AGE DESC, PT_NAME
+
+/*
+TLNO 컬럼이 null이면 'NONE'으로 출력한다
+12세 이하인 여자환자를 조건으로 설정한다
+나이를 기준으로 내림차순 정렬하고, 
+나이가 같다면 환자이름을 기준으로 오름차순 정렬
+
+ifnull함수 - 컬럼, null일때 바꾸고 싶은 값
+*/
+```
+
+인기 있는 아이스크림
+
+```sql
+SELECT FLAVOR FROM FIRST_HALF
+ORDER BY TOTAL_ORDER DESC, SHIPMENT_ID ASC
+
+/*
+총 주문량 (TOTAL_ORDER) 먼저 내림차순 해주고,
+이후 같으면 출하 번호 (SHIPMENT_ID) 오름차순으로 정렬해준다.
+*/
+```
+
+모든 레코드 조회하기
+
+```sql
+SELECT * 
+FROM ANIMAL_INS
+ORDER BY ANIMAL_ID;
+
+// all_tableS 사용 - 권한을 가진 모든 테이블이 조회되며 통계 정보를 쉽게 확인할 수 있다.
+```
+
+조건에 맞는 도서 리스트 출력하기
+
+```sql
+SELECT BOOK_ID, 
+DATE_FORMAT(PUBLISHED_DATE, '%Y-%m-%d') AS PUBLISHED_DATE
+FROM BOOK
+WHERE CATEGORY = '인문' AND YEAR(PUBLISHED_DATE) = 2021
+ORDER BY PUBLISHED_DATE;
+
+/*
+DATE_FORMAT(날짜 , 형식) : 날짜를 지정한 형식으로 출력해주고, 
+YEAR()함수를 사용해준다.
+*/
+```
+
+평균 일일 대여 요금 구하기
+
+```sql
+SELECT ROUND(AVG(DAILY_FEE), 0) AS AVERAGE_FEE
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE CAR_TYPE = 'SUV'
+
+/*
+자동차 종류 'SUV'인 자동차 선택 -> WHERE 절.
+평균 일일 대여 요금 계산 -> AVG() 사용.
+소수 첫 번째 자리에서 반올림 -> ROUND() 사용.
+컬럼명 지정 -> AS 이용.
+
+ROUND() - 값, 자릿수
+*/
+```
+
+최댓값 구하기
+
+```sql
+SELECT DATETIME AS 시간
+FROM ANIMAL_INS
+ORDER BY DATETIME DESC
+LIMIT 1;
+
+/*
+우선 ANIMAL_INS 테이블에서 DATETIME 를 시간으로 지정해주고
+LIMIT 를 이용해 상위 N개 행만 조회
+*/
+```
+
+과일로 만든 아이스크림 고르기
+
+```sql
+SELECT FIRST_HALF .FLAVOR
+FROM FIRST_HALF JOIN ICECREAM_INFO 
+ON FIRST_HALF.FLAVOR = ICECREAM_INFO.FLAVOR
+WHERE TOTAL_ORDER > 3000 AND INGREDIENT_TYPE = "fruit_based"
+ORDER BY TOTAL_ORDER DESC
+
+/* FLAVOR은 공통컬럼이기에 테이블명 지정해주고
+JOIN을 통해 FIRST_HALF테이블과 ICECREAM_INFO테이블을 합치고 
+ON을 통하여 조건에 맞는 결과만 출력하고,
+주문량이 3,000보다 높으면서 아이스크림의 주 성분이 과일 조건 추가. 
+총 주문량이 큰 순서대로 내림차순으로 조회.
+
+INNER JOIN을 JOIN이라고만 써도 INNER JOIN으로 인식.
+*/
+```
+
+특정 옵션이 포함된 자동차 리스트 구하기
+
+```sql
+SELECT *
+FROM CAR_RENTAL_COMPANY_CAR
+WHERE OPTIONS LiKe '%네비게이션%'
+ORDER BY CAR_ID DESC
+
+/*
+모든 컬럼을 불러오고, 테이블명을 지정해주고,
+WHERE 로 자동차 옵션 리스트에 '네비게이션'이 포함되어있는지 확인해주고,
+자동차 ID를 내림차순으로 정렬. 
+*/
+```
+
+자동차 대여 기록에서 장기/단기 대여 구분하기
+
+```sql
+SELECT HISTORY_ID, CAR_ID, DATE_FORMAT(START_DATE, '%Y-%m-%d') 
+AS START_DATE,
+DATE_FORMAT(END_DATE, '%Y-%m-%d') AS END_DATE,
+IF(DATEDIFF(END_DATE, START_DATE) >= 29, '장기 대여', '단기 대여') 
+AS RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE MONTH(START_DATE) = 9
+ORDER BY HISTORY_ID DESC
+
+/*
+CAR_RENTAL_COMPANY_RENTAL_HISTORY의 테이블을 이용하여
+[출력 결과]에 나와 있는 컬럼들과 동일한 순서로 나타내게 해주고,
+" SELECT "문에서 날짜 관련 컬럼의 출력 포맷을 변경하고, 
+CASE 문을 통해 'RENT_TYPE' 컬럼을 생성해준다.
+오늘 대여하고 오늘 반납해도 대여 기간은 하루이기 때문에
+(END_DATE - START_DATE ) + 1 >= 30으로 계산을 해준다.
+*/
+```
+
+조건에 부합하는 중고거래 댓글 조회하기
+
+```sql
+SELECT B.TITLE, B.BOARD_ID, R.REPLY_ID, R.WRITER_ID, R.CONTENTS, DATE_FORMAT(R.CREATED_DATE, "%Y-%m-%d") AS CREATED_DATE
+FROM USED_GOODS_REPLY AS R
+JOIN USED_GOODS_BOARD AS B ON R.BOARD_ID = B.BOARD_ID
+WHERE DATE_FORMAT(B.CREATED_DATE, "%Y-%m") = "2022-10"
+ORDER BY R.CREATED_DATE ASC, B.TITLE ASC
+
+/*
+JOIN 을 사용해 BOARD_ID를 키 값으로 두 테이블을 합친다.
+*/
+```
