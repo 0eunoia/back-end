@@ -1,51 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <title>나만의 동기부여 홈화면 만들기</title>
-    <script src="index.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <title>스파르타 피디아</title>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
         * {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Gowun Dodum', sans-serif;
         }
 
-        body {
-            background-image: url("https://mblogthumb-phinf.pstatic.net/MjAxNzA3MjNfMjUx/MDAxNTAwNzk1Mjg5NzA4.ZlowajlDOXm2LTN8yY-218YgjT6r2ZhHkNafBnDFTxUg.2jYHyU1FQPMfi55yOCewRQIao2fa07rZUIlSKzWCUuMg.PNG.badpark/1920x1080-005.png?type=w800");
+        .mytitle {
+
+
+            width: 100%;
+            height: 250px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg');
             background-position: center;
             background-size: cover;
 
             color: white;
-        }
-
-        .time {
-            font-size: 80px;
-            font-weight: bold;
-        }
-
-        .greeting {
-            font-size: 50px;
-        }
-
-        .todo {
-            font-size: 30px;
-        }
-
-        .author {
-            font-size: 25px;
-            font-style: italic;
-        }
-
-        .main {
-            width: 100vw;
-            height: 80vh;
 
             display: flex;
             flex-direction: column;
@@ -53,31 +39,125 @@
             justify-content: center;
         }
 
-        .quote {
-            width: 100vw;
-            height: 20vh;
+        .mytitle>button {
+            width: 200px;
+            height: 50px;
 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
         }
 
+        .mytitle>button:hover {
+            border: 2px solid white;
+        }
+
+        .mycomment {
+            color: gray;
+        }
+
+        .mycards {
+            width: 1200px;
+            margin: 20px auto 20px auto;
+        }
+        .mypost {
+
+            width: 500px;
+            margin: 20px auto 20px auto;
+
+            padding: 20px 20px 20px 20px;
+
+            box-shadow: 0px 0px 3px 0px gray;
+        }
+        .mybtn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            
+            margin-top: 20px;
+        }
+        .mybtn > button {
+            margin-right: 10px;
+        }
     </style>
-
-    <script>
-    </script>
 </head>
 
 <body>
-    <div class="main">
-        <div id="time" class="time">12:00</div>
-        <div class="greeting">Hello, Young-eun!</div>
-        <div class="todo">매일 운동하기!</div>
+    <div class="mytitle">
+        <h1>내 생애 최고의 영화들</h1>
+        <button>영화 기록하기</button>
     </div>
-    <div class="quote">
-        <div id="author">- 명언의 저자 -</div>
-        <div id="content">" 명언의 내용 "</div>
+    <div class="mypost">
+        <div class="form-floating mb-3">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">영화 URL</label>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+            <label for="floatingTextarea">코멘트</label>
+        </div>
+        <div class="mybtn">
+            <button type="button" class="btn btn-dark">기록하기</button>
+            <button type="button" class="btn btn-outline-dark">닫기</button>
+        </div>
+    </div>
+    <div class="mycards">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">영화 제목이 들어갑니다</h5>
+                        <p class="card-text">여기에 코멘트가 들어갑니다.</p>
+                        <p>⭐⭐⭐</p>
+                        <p class="mycomment">여기에 나의 의견을 쓰면 되겠죠.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">영화 제목이 들어갑니다</h5>
+                        <p class="card-text">여기에 코멘트가 들어갑니다.</p>
+                        <p>⭐⭐⭐</p>
+                        <p class="mycomment">여기에 나의 의견을 쓰면 되겠죠.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">영화 제목이 들어갑니다</h5>
+                        <p class="card-text">여기에 코멘트가 들어갑니다.</p>
+                        <p>⭐⭐⭐</p>
+                        <p class="mycomment">여기에 나의 의견을 쓰면 되겠죠.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://movie-phinf.pstatic.net/20210728_221/1627440327667GyoYj_JPEG/movie_image.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">영화 제목이 들어갑니다</h5>
+                        <p class="card-text">여기에 코멘트가 들어갑니다.</p>
+                        <p>⭐⭐⭐</p>
+                        <p class="mycomment">여기에 나의 의견을 쓰면 되겠죠.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </body>
 
