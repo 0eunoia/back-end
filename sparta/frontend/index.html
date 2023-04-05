@@ -89,15 +89,19 @@
         }
     </style>
     <script>
-        function hey(){
-            console.log('dkss')
-        }
+        $(document).ready(function () {
+            fetch("http://spartacodingclub.shop/sparta_api/weather/seoul").then(res => res.json()).then(data => {
+                let numer = data['temp']
+                $('#temp').text(numer)
+            })
+        })
     </script>
 </head>
 
 <body>
     <div class="mytitle">
         <h1>내 생애 최고의 영화들</h1>
+        <div>현재 서울의 날씨 : <span id="temp">20</span>도</div>
         <button onclick="hey()">영화 기록하기</button>
     </div>
     <div class="mypost">
@@ -106,7 +110,7 @@
             <label for="floatingInput">영화 URL</label>
         </div>
         <div class="input-group mb-3">
-            <select class="form-select" id="inputGroupSelect02"> 
+            <select class="form-select" id="inputGroupSelect02">
                 <option selected>그대~ 별점을 골라주세요!</option>
                 <option value="1">⭐</option>
                 <option value="2">⭐⭐</option>
@@ -179,4 +183,5 @@
         </div>
     </div>
 </body>
+
 </html>
