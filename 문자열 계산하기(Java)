@@ -1,0 +1,22 @@
+class Solution {
+    public int solution(String my_string) {
+        String[] arr = my_string.split("\\s");              
+        int answer = Integer.parseInt(arr[0]);           
+        
+        for (int i = 1; i < arr.length; i += 2) {           
+            if (arr[i].equals("+")) {
+                answer += Integer.parseInt(arr[i + 1]);     
+            } else {
+                answer -= Integer.parseInt(arr[i + 1]);
+            }
+        }
+        return answer;
+    }
+}
+
+// my_string을 공백을 기준으로 split 해주고,
+// Integer.parseInt
+// arr.length
+// arr의 첫번째 값으로 식을 시작해주고,
+// arr의 홀수번째 값은 사칙연산 기호
+// arr의 짝수번째 값은 정수
