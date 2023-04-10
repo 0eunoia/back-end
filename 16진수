@@ -1,0 +1,5 @@
+offset = __met_to_opcode_arm(*(u32 *)loc);
+offset = (offset & 0x00ffffff) << 2;
+if (offset & 0x02000000)
+offset -= 0x04000000;
+offset += sym->st_value - loc;
