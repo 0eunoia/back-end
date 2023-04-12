@@ -1,0 +1,42 @@
+public class Main {
+    public static void main(String[] args) {
+        // 기본 자료형
+        
+        short s =1;
+        System.out.println(s); // 1
+
+        int a = 3;
+        System.out.println(a); // 3
+
+        long b = 4;
+        System.out.println(b); // 4
+
+        float f = 5.5F;
+        System.out.println(f); // 5.5
+
+        double d = 5.5;
+        System.out.println(d); // 5.5
+
+        System.out.println(Short.MAX_VALUE); // 32767
+        System.out.println(Short.MIN_VALUE); // -32768
+        System.out.println(Integer.MAX_VALUE); // 2147483647
+        System.out.println(Integer.MIN_VALUE); // -2147483648
+        System.out.println(Long.MAX_VALUE); // 9223372036854775807
+        System.out.println(Long.MIN_VALUE); // -9223372036854775808
+        System.out.println(Float.MAX_VALUE); // 3.4028235E38
+        System.out.println(Float.MIN_VALUE); // 1.4E-45
+        System.out.println(Double.MAX_VALUE); // 1.7976931348623157E308
+        System.out.println(Double.MIN_VALUE); // 4.9E-324
+        
+        char c = 'A';
+        System.out.println(c);
+
+        boolean fact = true;
+        fact = false;
+        System.out.println(fact);
+
+        byte data = 'd';
+        System.out.println(data);
+
+    }
+}
