@@ -1,0 +1,18 @@
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+        // 배열
+        int[] intEmptyArray = new int[5]; // int의 5자리 배열 선언
+        System.out.println(Arrays.toString(intEmptyArray)); // int의 default 값 0으로 채워짐
+
+        int[] intArray = new int[] {1,2,3,4,5}; // int 배열을 선언과 동시에 초기화
+        System.out.println(Arrays.toString(intArray));
+
+        String[] stringEmptyArray = new String[5]; // 참조자료형 String의 5자리 배열 선언
+        System.out.println(Arrays.toString(stringEmptyArray)); // 참조자료형은 값이 없을 경우 null(아무것도 없다) 이라는 표현으로 표시
+
+        String[] months = {"1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"};
+        System.out.println(Arrays.toString(months));
+    }
+}
