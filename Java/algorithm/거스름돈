@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class ChaneMoney {
+    public static void main(String[] args) {
+
+        /* 거스름돈
+
+        당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원,
+        50원, 10원짜리 동전이 무한히 존재한다고 가정한다.
+
+        손님에게 거슬러 줘야 할 돈이 n 원일 때 거슬러 줘야 할 동전의 최소 개수를 구하라
+        tip : 가장 큰 화폐단위부터 돈을 거슬러준다.
+
+         */
+        Scanner sc = new Scanner(System.in);
+        int money = sc.nextInt(); // 손님한테 받는 돈
+        int count = 0; // 동전의 개수
+
+        int coin_type[] = {500,100,50,10};
+
+        for (int i = 0; i < coin_type.length; i++) {
+            count += money / coin_type[i];
+            money %= coin_type[i];
+        }
+        System.out.print(count);
+    }
+}
