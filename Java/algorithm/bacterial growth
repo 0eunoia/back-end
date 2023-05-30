@@ -1,8 +1,0 @@
-class Solution {
-    public int solution(int n, int t) {
-
-         return n << t;
-    }
-}
-
-// 시프트 연산
